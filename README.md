@@ -1,41 +1,28 @@
 ### Hi, I'm Velagapudi Mahendra
 
-I build practical AI and data products that turn raw information into decisions — from healthcare early-warning systems and sentiment intelligence tools to sales analytics and business dashboards.
+AI & Data Engineer with a focus on building practical ML and analytics solutions for healthcare, business intelligence, and decision support.
 
-**What I focus on**
-- Machine Learning for real-world problems in healthcare, climate, and business
-- End-to-end data pipelines using SQL, Python, and analytics tooling
-- AI-powered applications that are useful, explainable, and production-friendly
+- Applied machine learning and predictive analytics
+- End-to-end data pipelines and reporting workflows
+- AI products that turn raw data into actionable insights
 
-**Tech Stack**
-`Python` · `TypeScript` · `JavaScript` · `SQL` · `Jupyter` · `React` · `Power BI` · `Machine Learning` · `Data Analysis`
+### Tech Stack
+Python · SQL · JavaScript · TypeScript · React · Power BI · Jupyter · Pandas · NumPy · scikit-learn · ML workflows
 
-**Featured Projects**
-- **SentimentScope** — AI-powered sentiment analysis for real-time business insights
-- **Early Warning Patient Deterioration** — ML system designed to predict clinical risk early
-- **Customer Trends Analysis** — Full SQL + Python + Power BI workflow for customer intelligence
-- **VectorMind** — AI sales analyst that explains trends, forecasts, and opportunities
+### Featured Projects
+- SentimentScope — AI-powered sentiment analysis with real-time business insights
+- Early Warning Patient Deterioration — predictive healthcare risk model
+- Customer Trends Analysis — SQL + Python + Power BI analytics pipeline
+- VectorMind — AI sales analyst for trend explanation and forecasting
 
-**Current Interests**
-- Applied AI and decision-support systems
-- Data engineering and analytics workflows
-- Healthcare analytics and predictive modeling
-- Building clean, scalable AI products
+### Current Focus
+- Applied AI in healthcare and business analytics
+- Data engineering and pipeline design
+- Building explainable, reliable ML systems
 
-**Connect**
+### Connect
 [LinkedIn](https://www.linkedin.com/in/velagapudi-mahendra-543481353/)
 
 <!--
 **mahendravelagapudi099-wq/mahendravelagapudi099-wq** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
 -->
