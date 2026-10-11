@@ -1,23 +1,30 @@
-
 ### Hi, I'm Velagapudi Mahendra
 
-I build practical AI and data products — from healthcare early-warning systems to sentiment analysis and sales analytics tools.
+I build practical AI and data products that turn raw information into decisions — from healthcare early-warning systems and sentiment intelligence tools to sales analytics and business dashboards.
 
 **What I focus on**
-- Machine Learning for real-world problems (healthcare, climate, business)
-- End-to-end data pipelines (SQL → Python → Power BI / dashboards)
-- Clean, usable AI applications
+- Machine Learning for real-world problems in healthcare, climate, and business
+- End-to-end data pipelines using SQL, Python, and analytics tooling
+- AI-powered applications that are useful, explainable, and production-friendly
 
 **Tech Stack**
-`Python` · `TypeScript` · `JavaScript` · `SQL` · `Jupyter` · `React` · `Power BI`
+`Python` · `TypeScript` · `JavaScript` · `SQL` · `Jupyter` · `React` · `Power BI` · `Machine Learning` · `Data Analysis`
 
 **Featured Projects**
-- **SentimentScope** — AI-powered sentiment analysis with real-time insights
-- **Early Warning Patient Deterioration** — ML system to predict clinical risk
-- **Customer Trends Analysis** — Full SQL + Python + Power BI pipeline
-- **VectorMind** — AI sales analyst that explains trends and forecasts
+- **SentimentScope** — AI-powered sentiment analysis for real-time business insights
+- **Early Warning Patient Deterioration** — ML system designed to predict clinical risk early
+- **Customer Trends Analysis** — Full SQL + Python + Power BI workflow for customer intelligence
+- **VectorMind** — AI sales analyst that explains trends, forecasts, and opportunities
 
+**Current Interests**
+- Applied AI and decision-support systems
+- Data engineering and analytics workflows
+- Healthcare analytics and predictive modeling
+- Building clean, scalable AI products
+
+**Connect**
 [LinkedIn](https://www.linkedin.com/in/velagapudi-mahendra-543481353/)
+
 <!--
 **mahendravelagapudi099-wq/mahendravelagapudi099-wq** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
