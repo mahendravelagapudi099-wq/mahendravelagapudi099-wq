@@ -1,0 +1,141 @@
+<svg viewBox="0 0 900 160" width="100%" height="160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Ultra-Realistic Metallic Datacenter Gradients -->
+    <linearGradient id="dcFloor" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#080b11" />
+      <stop offset="50%" stop-color="#020408" />
+      <stop offset="100%" stop-color="#05080f" />
+    </linearGradient>
+    <linearGradient id="metalCasing" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#111827" />
+      <stop offset="30%" stop-color="#1f2937" />
+      <stop offset="70%" stop-color="#374151" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+    <linearGradient id="copperWire" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D97706" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#B45309" />
+    </linearGradient>
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- ==================== ULTRA-REALISTIC DATACENTER RACK ==================== -->
+    <g id="dc-rack">
+      <!-- Main Cabinet Frame -->
+      <rect width="65" height="130" rx="3" fill="url(#metalCasing)" stroke="#4B5563" stroke-width="1.5" />
+      <rect x="5" y="8" width="55" height="114" fill="#020617" stroke="#1F2937" stroke-width="1" />
+      <!-- Server Blade Rows with Blinking Status LEDs -->
+      <g fill="#0f172a" stroke="#334155" stroke-width="0.8">
+        <rect x="8" y="12" width="49" height="14" rx="1" />
+        <rect x="8" y="29" width="49" height="14" rx="1" />
+        <rect x="8" y="46" width="49" height="14" rx="1" />
+        <rect x="8" y="63" width="49" height="14" rx="1" />
+        <rect x="8" y="80" width="49" height="14" rx="1" />
+        <rect x="8" y="97" width="49" height="14" rx="1" />
+      </g>
+      <!-- LED Indicators -->
+      <circle cx="14" cy="19" r="1.5" fill="#10B981" />
+      <circle cx="20" cy="19" r="1.5" fill="#38BDF8" />
+      <circle cx="14" cy="36" r="1.5" fill="#10B981" />
+      <circle cx="20" cy="36" r="1.5" fill="#F59E0B" />
+      <circle cx="14" cy="53" r="1.5" fill="#10B981" />
+      <circle cx="14" cy="70" r="1.5" fill="#EF4444" />
+      <circle cx="14" cy="87" r="1.5" fill="#10B981" />
+      <circle cx="14" cy="104" r="1.5" fill="#38BDF8" />
+    </g>
+
+    <!-- ==================== REALISTIC HUMAN-LIKE MAINTENANCE ROBOT ==================== -->
+    <g id="datacenter-robot">
+      <!-- Articulated Bipedal / Wheeled Chassis -->
+      <rect x="-8" y="4" width="16" height="12" rx="3" fill="#1E293B" stroke="#64748B" stroke-width="1" />
+      <!-- Torso with Power Core -->
+      <rect x="-10" y="-12" width="20" height="17" rx="3" fill="#0F172A" stroke="#3B82F6" stroke-width="1.2" />
+      <circle cx="0" cy="-3.5" r="3.5" fill="#38BDF8" filter="url(#neonGlow)" />
+      <!-- Shoulders & Articulated Arms Working on Cables -->
+      <circle cx="-12" y="-10" r="2.5" fill="#475569" />
+      <circle cx="12" y="-10" r="2.5" fill="#475569" />
+      <path d="M -12 -10 L -20 0 L -14 6" fill="none" stroke="#94A3B8" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M 12 -10 L 22 -2 L 18 8" fill="none" stroke="#94A3B8" stroke-width="2.5" stroke-linecap="round" />
+      <!-- Precision Repair Laser / Torch Tip -->
+      <circle cx="18" cy="8" r="2" fill="#EF4444" filter="url(#neonGlow)" />
+      <!-- Sleek Robotic Head with Optical Visor -->
+      <rect x="-7" y="-22" width="14" height="9" rx="2" fill="#1E293B" stroke="#94A3B8" stroke-width="1.2" />
+      <rect x="-5" y="-19" width="10" height="3.5" rx="1" fill="#020617" />
+      <rect x="-3" y="-18" width="6" height="1.5" fill="#06B6D4" filter="url(#neonGlow)" />
+    </g>
+  </defs>
+
+  <style>
+    @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+    
+    /* Robot 1: Patrols left corridor and inspects cable harness */
+    @keyframes botInspect1 {
+      0%   { transform: translateX(120px); }
+      45%  { transform: translateX(380px); }
+      48%  { transform: translateX(380px) scaleY(0.95); } /* Bending down to fix wire */
+      52%  { transform: translateX(380px) scaleY(1); }
+      95%  { transform: translateX(120px) scaleX(-1); }
+      100% { transform: translateX(120px) scaleX(1); }
+    }
+    /* Robot 2: Dedicated fiber optic wiring technician */
+    @keyframes botInspect2 {
+      0%   { transform: translateX(740px) scaleX(-1); }
+      40%  { transform: translateX(500px) scaleX(-1); }
+      45%  { transform: translateX(500px) translateY(-3px); } /* Soldering action */
+      50%  { transform: translateX(500px) translateY(0px); }
+      90%  { transform: translateX(740px) scaleX(1); }
+      100% { transform: translateX(740px) scaleX(-1); }
+    }
+
+    .pulse-led { animation: pulse 1.8s infinite ease-in-out; }
+    .robot-1   { animation: botInspect1 22s linear infinite; }
+    .robot-2   { animation: botInspect2 26s linear infinite; }
+  </style>
+
+  <!-- ==================== DATACenter FLOOR & CEILING ==================== -->
+  <rect width="900" height="160" rx="6" fill="url(#dcFloor)" stroke="#1E293B" stroke-width="2" />
+
+  <!-- Heavy Raised Floor Panels & Overhead Cable Trays -->
+  <g stroke="#111827" stroke-width="1.2">
+    <line x1="0" y1="135" x2="900" y2="135" stroke="#334155" stroke-width="2" />
+    <line x1="0" y1="20" x2="900" y2="20" />
+    <line x1="180" y1="20" x2="180" y2="135" />
+    <line x1="360" y1="20" x2="360" y2="135" />
+    <line x1="540" y1="20" x2="540" y2="135" />
+    <line x1="720" y1="20" x2="720" y2="135" />
+  </g>
+
+  <!-- ==================== HANGING FIBER OPTIC CABLE BUNDLES ==================== -->
+  <g fill="none" stroke-width="2">
+    <path d="M 150 20 Q 165 65 180 30" stroke="url(#copperWire)" />
+    <path d="M 320 20 Q 340 75 360 25" stroke="#3B82F6" />
+    <path d="M 510 20 Q 525 70 540 25" stroke="#10B981" />
+    <path d="M 690 20 Q 705 60 720 25" stroke="#A855F7" />
+  </g>
+
+  <!-- ==================== HIGH-END DATACENTER RACKS ==================== -->
+  <g transform="translate(45, 12)"><use href="#dc-rack" /></g>
+  <g transform="translate(225, 12)"><use href="#dc-rack" /></g>
+  <!-- Open Maintenance Corridor Gap (300px to 600px) -->
+  <g transform="translate(605, 12)"><use href="#dc-rack" /></g>
+  <g transform="translate(785, 12)"><use href="#dc-rack" /></g>
+
+  <!-- ==================== REAL-TIME DATACENTER MAINTENANCE ROBOT 1 ==================== -->
+  <g class="robot-1" transform="translate(0, 95)">
+    <!-- Diagnostic Hologram HUD Screen -->
+    <rect x="-34" y="-38" width="68" height="14" rx="2" fill="#020617" stroke="#38BDF8" stroke-width="0.9" opacity="0.9" />
+    <text x="-30" y="-29" font-family="monospace" font-size="7.5" font-weight="bold" fill="#38BDF8">SYS: REWIRING_OK</text>
+    <use href="#datacenter-robot" />
+  </g>
+
+  <!-- ==================== REAL-REALTIME DATACENTER MAINTENANCE ROBOT 2 ==================== -->
+  <g class="robot-2" transform="translate(0, 95)">
+    <!-- Diagnostic Hologram HUD Screen -->
+    <rect x="-34" y="-38" width="68" height="14" rx="2" fill="#020617" stroke="#10B981" stroke-width="0.9" opacity="0.9" />
+    <text x="-30" y="-29" font-family="monospace" font-size="7.5" font-weight="bold" fill="#34D399">FIBER_OPTIC: 100G</text>
+    <use href="#datacenter-robot" />
+  </g>
+</svg>
