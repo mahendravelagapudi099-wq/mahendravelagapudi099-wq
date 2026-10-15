@@ -1,0 +1,112 @@
+name: Generate Walking Pokemon Pets
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths-ignore:
+      - '*.svg'
+
+permissions:
+  contents: write
+
+jobs:
+  build-pets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate Animated Walking Pokemon SVGs
+        run: |
+          python3 - << 'EOF'
+          import urllib.request
+          import base64
+
+          def get_b64(poke_id):
+              url = f"https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/versions/generation-v/black-white/animated/{poke_id}.gif"
+              req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+              with urllib.request.urlopen(req) as resp:
+                  return base64.b64encode(resp.read()).decode('utf-8')
+
+          def build_svg(filename, height, pets):
+              styles = []
+              elements = []
+              for i, p in enumerate(pets):
+                  b64 = get_b64(p['id'])
+                  dur = p['dur']
+                  delay = p['delay']
+                  size = p['size']
+                  y = p['y']
+                  start_x = p.get('start', 40)
+                  end_x = p.get('end', 760)
+                  half = size // 2
+
+                  if p.get('dir', 'right') == 'right':
+                      kf = f"""
+                      @keyframes walk_{i} {{
+                        0%   {{ transform: translateX({start_x}px) scaleX(-1); }}
+                        48%  {{ transform: translateX({end_x}px) scaleX(-1); }}
+                        50%  {{ transform: translateX({end_x}px) scaleX(1); }}
+                        98%  {{ transform: translateX({start_x}px) scaleX(1); }}
+                        100% {{ transform: translateX({start_x}px) scaleX(-1); }}
+                      }}"""
+                  else:
+                      kf = f"""
+                      @keyframes walk_{i} {{
+                        0%   {{ transform: translateX({end_x}px) scaleX(1); }}
+                        48%  {{ transform: translateX({start_x}px) scaleX(1); }}
+                        50%  {{ transform: translateX({start_x}px) scaleX(-1); }}
+                        98%  {{ transform: translateX({end_x}px) scaleX(-1); }}
+                        100% {{ transform: translateX({end_x}px) scaleX(1); }}
+                      }}"""
+
+                  styles.append(kf + f"\n.pet_{i} {{ animation: walk_{i} {dur}s linear {delay}s infinite; }}")
+                  elements.append(
+                      f'<g class="pet_{i}"><image x="-{half}" y="{y}" width="{size}" height="{size}" href="data:image/gif;base64,{b64}" /></g>'
+                  )
+
+              svg = f'''<svg viewBox="0 0 800 {height}" width="100%" height="{height}" xmlns="http://www.w3.org/2000/svg">
+              <style>
+                {"".join(styles)}
+              </style>
+              {"".join(elements)}
+              </svg>'''
+              with open(filename, 'w') as f:
+                  f.write(svg)
+
+          # Track 1: Top Playground (Pikachu, Eevee, Charmander, Squirtle, Bulbasaur, Mew)
+          build_svg("pets-top.svg", 60, [
+              {'id': 25,  'size': 46, 'y': 10, 'dur': 18, 'delay': 0,  'dir': 'right', 'start': 40,  'end': 760},
+              {'id': 133, 'size': 42, 'y': 14, 'dur': 22, 'delay': -5, 'dir': 'left',  'start': 60,  'end': 740},
+              {'id': 4,   'size': 44, 'y': 12, 'dur': 20, 'delay': -9, 'dir': 'right', 'start': 80,  'end': 720},
+              {'id': 7,   'size': 42, 'y': 14, 'dur': 25, 'delay': -3, 'dir': 'left',  'start': 50,  'end': 750},
+              {'id': 1,   'size': 42, 'y': 14, 'dur': 27, 'delay': -12,'dir': 'right', 'start': 100, 'end': 700},
+              {'id': 151, 'size': 44, 'y': 4,  'dur': 15, 'delay': -7, 'dir': 'left',  'start': 40,  'end': 760},
+          ])
+
+          # Track 2: Middle Divider (Charizard flying, Lucario running, Gengar, Porygon)
+          build_svg("pets-mid.svg", 64, [
+              {'id': 6,   'size': 56, 'y': 2,  'dur': 16, 'delay': 0,  'dir': 'right', 'start': 50, 'end': 750},
+              {'id': 448, 'size': 46, 'y': 14, 'dur': 19, 'delay': -6, 'dir': 'left',  'start': 40, 'end': 760},
+              {'id': 94,  'size': 46, 'y': 14, 'dur': 23, 'delay': -11,'dir': 'right', 'start': 70, 'end': 730},
+              {'id': 137, 'size': 40, 'y': 16, 'dur': 26, 'delay': -4, 'dir': 'left',  'start': 90, 'end': 710},
+          ])
+
+          # Track 3: Footer Roaming (Rayquaza, Dragonite, Umbreon, Jigglypuff, Snorlax)
+          build_svg("pets-bottom.svg", 68, [
+              {'id': 384, 'size': 60, 'y': 2,  'dur': 17, 'delay': -2, 'dir': 'left',  'start': 50,  'end': 750},
+              {'id': 149, 'size': 52, 'y': 8,  'dur': 21, 'delay': -8, 'dir': 'right', 'start': 40,  'end': 760},
+              {'id': 197, 'size': 44, 'y': 18, 'dur': 19, 'delay': -4, 'dir': 'right', 'start': 80,  'end': 720},
+              {'id': 39,  'size': 38, 'y': 22, 'dur': 28, 'delay': -14,'dir': 'left',  'start': 100, 'end': 700},
+              {'id': 143, 'size': 50, 'y': 14, 'dur': 45, 'delay': 0,  'dir': 'right', 'start': 350, 'end': 450},
+          ])
+          EOF
+
+      - name: Commit and Push SVG Tracks
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pets-top.svg pets-mid.svg pets-bottom.svg
+          git diff --staged --quiet || git commit -m "Add animated walking Pokemon SVG tracks"
+          git push
