@@ -1,0 +1,289 @@
+<svg viewBox="0 0 900 320" width="100%" height="320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Office Floor Texture Gradient -->
+    <linearGradient id="woodFloor" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b18" />
+      <stop offset="50%" stop-color="#141210" />
+      <stop offset="100%" stop-color="#1c1815" />
+    </linearGradient>
+    <linearGradient id="serverFloor" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#090d16" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- ==================== TOP-DOWN PIXEL AI CHARACTERS & BOTS ==================== -->
+    <!-- 1. Pixel AI Researcher (Sitting/Walking Variant) -->
+    <g id="pixel-researcher">
+      <rect x="3" y="1" width="10" height="5" fill="#8B4513" /> <!-- Hair -->
+      <rect x="3" y="6" width="10" height="6" fill="#FAD02C" /> <!-- Shirt -->
+      <rect x="4" y="12" width="8" height="6" fill="#1D4ED8" /> <!-- Pants -->
+      <rect x="4" y="18" width="3" height="3" fill="#111827" /> <!-- Boots -->
+      <rect x="9" y="18" width="3" height="3" fill="#111827" />
+    </g>
+
+    <!-- 2. Pixel Autonomous Agent Bot -->
+    <g id="pixel-agent-bot">
+      <rect x="4" y="2" width="8" height="7" rx="1" fill="#2E1065" stroke="#A855F7" stroke-width="1" />
+      <rect x="6" y="4" width="4" height="2" fill="#38BDF8" />
+      <rect x="3" y="10" width="10" height="8" rx="1" fill="#1E1B4B" stroke="#8B5CF6" stroke-width="1" />
+      <rect x="6" y="13" width="4" height="3" fill="#10B981" />
+      <rect x="4" y="18" width="3" height="3" fill="#64748B" />
+      <rect x="9" y="18" width="3" height="3" fill="#64748B" />
+    </g>
+
+    <!-- 3. Pixel ETL Data Carrier Bot -->
+    <g id="pixel-etl-bot">
+      <rect x="4" y="3" width="8" height="6" rx="1" fill="#083344" stroke="#06B6D4" stroke-width="1" />
+      <rect x="6" y="5" width="4" height="2" fill="#38BDF8" />
+      <rect x="3" y="10" width="10" height="8" rx="1" fill="#020617" stroke="#0891B2" stroke-width="1" />
+      <!-- Carrying Data Block -->
+      <rect x="13" y="9" width="7" height="7" rx="1" fill="#06B6D4" stroke="#CFFAFE" stroke-width="0.8" />
+      <rect x="3" y="18" width="3" height="3" fill="#334155" />
+      <rect x="10" y="18" width="3" height="3" fill="#334155" />
+    </g>
+
+    <!-- 4. Pixel Debug / Bug Sweeper Bot -->
+    <g id="pixel-debug-bot">
+      <rect x="3" y="5" width="10" height="9" rx="2" fill="#064E3B" stroke="#10B981" stroke-width="1" />
+      <rect x="5" y="7" width="6" height="3" fill="#34D399" />
+      <circle cx="8" cy="2" r="1.5" fill="#F59E0B" />
+      <line x1="8" y1="2" x2="8" y2="5" stroke="#10B981" stroke-width="1" />
+      <rect x="3" y="14" width="3" height="3" fill="#1E293B" />
+      <rect x="10" y="14" width="3" height="3" fill="#1E293B" />
+    </g>
+  </defs>
+
+  <style>
+    .label { font-family: 'Courier New', monospace; font-size: 8.5px; font-weight: bold; fill: #93C5FD; }
+    .sub   { font-family: 'Courier New', monospace; font-size: 7.5px; fill: #64748B; }
+    .code  { font-family: 'Courier New', monospace; font-size: 8px; font-weight: bold; fill: #38BDF8; }
+    .brain { font-family: 'Courier New', monospace; font-size: 7.5px; font-weight: bold; }
+
+    @keyframes pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+    @keyframes blink { 0%, 48% { opacity: 1; } 50%, 100% { opacity: 0.15; } }
+
+    @keyframes thought1 { 0%, 24% { opacity: 1; } 25%, 100% { opacity: 0; } }
+    @keyframes thought2 { 0%, 24% { opacity: 0; } 25%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+    @keyframes thought3 { 0%, 49% { opacity: 0; } 50%, 74% { opacity: 1; } 75%, 100% { opacity: 0; } }
+    @keyframes thought4 { 0%, 74% { opacity: 0; } 75%, 100% { opacity: 1; } }
+
+    /* ========================================================================
+       TRUE MULTI-DIRECTIONAL 2D OFFICE ROAMING PATHS (X and Y coordinates)
+       ======================================================================== */
+    /* Bot 1: Agent Alpha (Roams between Desks, Server Room, and Breakroom) */
+    @keyframes officeAlpha {
+      0%   { transform: translate(120px, 80px); }
+      15%  { transform: translate(320px, 80px); }  /* Move East past Desks */
+      25%  { transform: translate(320px, 220px); } /* Turn South into Hallway */
+      40%  { transform: translate(520px, 220px); } /* Move East to Server Room */
+      55%  { transform: translate(750px, 100px); } /* Move NE into Analytics Bay */
+      70%  { transform: translate(520px, 140px); } /* Move NW back to central area */
+      85%  { transform: translate(220px, 140px); } /* Move West past Bookshelves */
+      100% { transform: translate(120px, 80px); }  /* Return to starting desk */
+    }
+
+    /* Bot 2: ETL Carrier Bot (Loops around Data Pipelines and Desks) */
+    @keyframes officeETL {
+      0%   { transform: translate(750px, 240px); }
+      20%  { transform: translate(520px, 240px); } /* Move West along bottom */
+      35%  { transform: translate(320px, 140px); } /* Move NW to desk cluster */
+      50%  { transform: translate(120px, 140px); } /* Move West to SQL Warehouse */
+      65%  { transform: translate(120px, 80px); }  /* Move North */
+      80%  { transform: translate(520px, 80px); }  /* Move East across top aisle */
+      100% { transform: translate(750px, 240px); } /* Return to BI Hub */
+    }
+
+    /* Bot 3: Debug Bot (Zips around Bookshelves, Bug Hunting, Random Angles) */
+    @keyframes officeDebug {
+      0%   { transform: translate(220px, 220px); }
+      20%  { transform: translate(120px, 220px); } /* Sweep bottom left */
+      35%  { transform: translate(120px, 80px); }  /* Climb up left corridor */
+      55%  { transform: translate(520px, 80px); }  /* Patrol top server row */
+      75%  { transform: translate(750px, 140px); } /* Check anomaly logs */
+      90%  { transform: translate(320px, 220px); } /* Diagonal sweep back */
+      100% { transform: translate(220px, 220px); }
+    }
+
+    .pulse-led { animation: pulse 2.2s infinite ease-in-out; }
+    .blink-led { animation: blink 1.1s infinite; }
+
+    .bot-alpha  { animation: officeAlpha 26s linear infinite; }
+    .bot-etl    { animation: officeETL 30s linear infinite; }
+    .bot-debug  { animation: officeDebug 22s linear infinite; }
+
+    .t1-a { animation: thought1 26s infinite; }
+    .t2-a { animation: thought2 26s infinite; }
+    .t3-a { animation: thought3 26s infinite; }
+    .t4-a { animation: thought4 26s infinite; }
+
+    .t1-e { animation: thought1 30s infinite; }
+    .t2-e { animation: thought2 30s infinite; }
+    .t3-e { animation: thought3 30s infinite; }
+    .t4-e { animation: thought4 30s infinite; }
+
+    .t1-d { animation: thought1 22s infinite; }
+    .t2-d { animation: thought2 22s infinite; }
+    .t3-d { animation: thought3 22s infinite; }
+    .t4-d { animation: thought4 22s infinite; }
+  </style>
+
+  <!-- ==================== OFFICE ROOM FLOOR ==================== -->
+  <rect width="900" height="320" rx="10" fill="url(#woodFloor)" stroke="#292524" stroke-width="2" />
+
+  <!-- Tile Grid Lines (RPG Office Style) -->
+  <g stroke="#26221f" stroke-width="0.8" opacity="0.6">
+    <line x1="0" y1="60" x2="900" y2="60" />
+    <line x1="0" y1="120" x2="900" y2="120" />
+    <line x1="0" y1="180" x2="900" y2="180" />
+    <line x1="0" y1="240" x2="900" y2="240" />
+    <line x1="180" y1="0" x2="180" y2="320" />
+    <line x1="360" y1="0" x2="360" y2="320" />
+    <line x1="540" y1="0" x2="540" y2="320" />
+    <line x1="720" y1="0" x2="720" y2="320" />
+  </g>
+
+  <!-- ==================== TOP-DOWN RPG FURNITURE & WORKSTATIONS ==================== -->
+  <!-- Bookshelf 1 (Top Left) -->
+  <g transform="translate(30, 20)">
+    <rect width="100" height="35" rx="3" fill="#3B2F2F" stroke="#5C4033" stroke-width="1.5" />
+    <rect x="8" y="6" width="84" height="23" fill="#1E1918" />
+    <line x1="50" y1="6" x2="50" y2="29" stroke="#5C4033" stroke-width="1" />
+    <!-- Book spines -->
+    <rect x="14" y="10" width="6" height="15" fill="#EF4444" />
+    <rect x="22" y="10" width="5" height="15" fill="#3B82F6" />
+    <rect x="29" y="10" width="7" height="15" fill="#10B981" />
+    <rect x="56" y="10" width="6" height="15" fill="#F59E0B" />
+    <rect x="64" y="10" width="8" height="15" fill="#8B5CF6" />
+  </g>
+
+  <!-- Bookshelf 2 (Top Center) -->
+  <g transform="translate(390, 20)">
+    <rect width="100" height="35" rx="3" fill="#3B2F2F" stroke="#5C4033" stroke-width="1.5" />
+    <rect x="8" y="6" width="84" height="23" fill="#1E1918" />
+    <rect x="15" y="10" width="6" height="15" fill="#06B6D4" />
+    <rect x="24" y="10" width="8" height="15" fill="#EC4899" />
+    <rect x="58" y="10" width="5" height="15" fill="#10B981" />
+  </g>
+
+  <!-- Breakroom Vending Machine Area (Top Right Corner) -->
+  <g transform="translate(750, 15)">
+    <rect width="120" height="45" rx="3" fill="#0F172A" stroke="#334155" stroke-width="1.5" />
+    <!-- Vending Machine -->
+    <rect x="10" y="6" width="40" height="33" rx="2" fill="#1E293B" stroke="#06B6D4" stroke-width="1" />
+    <rect x="14" y="10" width="32" height="18" fill="#020617" />
+    <rect x="17" y="13" width="7" height="12" fill="#3B82F6" class="pulse-led" />
+    <rect x="27" y="13" width="7" height="12" fill="#F59E0B" />
+    <!-- Water Cooler -->
+    <rect x="65" y="8" width="22" height="30" rx="2" fill="#334155" />
+    <ellipse cx="76" cy="10" rx="7" ry="5" fill="#38BDF8" opacity="0.8" />
+  </g>
+
+  <!-- WORKSTATION DESK 1 (SQL & Analytics Desk) -->
+  <g transform="translate(90, 95)">
+    <rect width="75" height="45" rx="3" fill="#5C4033" stroke="#3B2F2F" stroke-width="2" />
+    <!-- Computer Monitor -->
+    <rect x="22" y="6" width="31" height="20" rx="2" fill="#0F172A" stroke="#38BDF8" stroke-width="1" />
+    <text x="27" y="19" class="code" fill="#34D399">SQL</text>
+    <!-- Chair -->
+    <rect x="27" y="52" width="21" height="16" rx="4" fill="#1E293B" stroke="#475569" stroke-width="1" />
+    <!-- Sitting Researcher -->
+    <use href="#pixel-researcher" x="30" y="50" />
+  </g>
+
+  <!-- WORKSTATION DESK 2 (Neural AI Training Desk) -->
+  <g transform="translate(390, 95)">
+    <rect width="75" height="45" rx="3" fill="#5C4033" stroke="#3B2F2F" stroke-width="2" />
+    <rect x="22" y="6" width="31" height="20" rx="2" fill="#0F172A" stroke="#A855F7" stroke-width="1" />
+    <text x="27" y="19" class="code" fill="#C084FC">LLM</text>
+    <rect x="27" y="52" width="21" height="16" rx="4" fill="#1E293B" stroke="#475569" stroke-width="1" />
+    <use href="#pixel-researcher" x="30" y="50" />
+  </g>
+
+  <!-- WORKSTATION DESK 3 (Power BI Dashboard Desk) -->
+  <g transform="translate(90, 220)">
+    <rect width="75" height="45" rx="3" fill="#5C4033" stroke="#3B2F2F" stroke-width="2" />
+    <rect x="22" y="6" width="31" height="20" rx="2" fill="#0F172A" stroke="#F59E0B" stroke-width="1" />
+    <text x="26" y="19" class="code" fill="#FCD34D">BI</text>
+    <rect x="27" y="52" width="21" height="16" rx="4" fill="#1E293B" stroke="#475569" stroke-width="1" />
+    <use href="#pixel-researcher" x="30" y="50" />
+  </g>
+
+  <!-- WORKSTATION DESK 4 (VectorMind / RAG Desk) -->
+  <g transform="translate(390, 220)">
+    <rect width="75" height="45" rx="3" fill="#5C4033" stroke="#3B2F2F" stroke-width="2" />
+    <rect x="22" y="6" width="31" height="20" rx="2" fill="#0F172A" stroke="#06B6D4" stroke-width="1" />
+    <text x="26" y="19" class="code" fill="#67E8F9">RAG</text>
+    <rect x="27" y="52" width="21" height="16" rx="4" fill="#1E293B" stroke="#475569" stroke-width="1" />
+    <use href="#pixel-researcher" x="30" y="50" />
+  </g>
+
+  <!-- SERVER ROOM RACKS (Right Side Area) -->
+  <g transform="translate(680, 80)">
+    <rect width="180" height="200" rx="6" fill="url(#serverFloor)" stroke="#3B82F6" stroke-width="1.8" />
+    <text x="14" y="22" class="title" fill="#60A5FA">SERVER_CLUSTER // DATA_PIPELINE</text>
+    
+    <!-- Rack 1 -->
+    <rect x="14" y="38" width="70" height="65" rx="2" fill="#020617" stroke="#1D4ED8" stroke-width="1" />
+    <circle cx="24" cy="52" r="3" fill="#10B981" class="blink-led" />
+    <circle cx="34" cy="52" r="3" fill="#38BDF8" />
+    <rect x="44" y="49" width="30" height="6" fill="#1E40AF" />
+    <circle cx="24" cy="74" r="3" fill="#10B981" />
+    <circle cx="34" cy="74" r="3" fill="#F59E0B" class="blink-led" />
+    <rect x="44" y="71" width="30" height="6" fill="#1E40AF" />
+
+    <!-- Rack 2 -->
+    <rect x="96" y="38" width="70" height="65" rx="2" fill="#020617" stroke="#1D4ED8" stroke-width="1" />
+    <circle cx="106" cy="52" r="3" fill="#10B981" class="pulse-led" />
+    <circle cx="116" cy="52" r="3" fill="#A855F7" />
+    <rect x="126" y="49" width="30" height="6" fill="#3B82F6" />
+    <circle cx="106" cy="74" r="3" fill="#10B981" />
+    <circle cx="116" cy="74" r="3" fill="#10B981" />
+    <rect x="126" y="71" width="30" height="6" fill="#3B82F6" />
+
+    <!-- Data Flow HUD Console at bottom of Server Room -->
+    <rect x="14" y="118" width="152" height="65" rx="3" fill="#020617" stroke="#2563EB" stroke-width="1" />
+    <text x="22" y="136" class="code" fill="#34D399">ETL_STATUS: LIVE</text>
+    <polyline points="22,160 50,148 80,154 110,142 145,145" fill="none" stroke="#38BDF8" stroke-width="2" />
+    <text x="22" y="174" class="sub">14.8 GB/s transformed</text>
+  </g>
+
+  <!-- =========================================================================
+       TRUE MULTI-DIRECTIONAL BOT 1: AGENT ALPHA (Purple AI Bot with Thought HUD)
+       ========================================================================= -->
+  <g class="bot-alpha">
+    <rect x="-36" y="-26" width="72" height="13" rx="4" fill="#1E1B4B" stroke="#A855F7" stroke-width="1" />
+    <text x="-31" y="-17" class="brain t1-a" fill="#DDD6FE">THINK: AGENT_RAG</text>
+    <text x="-31" y="-17" class="brain t2-a" fill="#38BDF8">WALK: TO_SERVER</text>
+    <text x="-31" y="-17" class="brain t3-a" fill="#34D399">SYNC: SQL_PIPE</text>
+    <text x="-31" y="-17" class="brain t4-a" fill="#FCD34D">STATUS: 99.8%</text>
+    <use href="#pixel-agent-bot" x="-8" y="-9" />
+  </g>
+
+  <!-- =========================================================================
+       TRUE MULTI-DIRECTIONAL BOT 2: ETL CARRIER BOT (Cyan Robot with Data Cube)
+       ========================================================================= -->
+  <g class="bot-etl">
+    <rect x="-36" y="-26" width="72" height="13" rx="4" fill="#083344" stroke="#06B6D4" stroke-width="1" />
+    <text x="-31" y="-17" class="brain t1-e" fill="#67E8F9">ETL: FETCH_BATCH</text>
+    <text x="-31" y="-17" class="brain t2-e" fill="#FDE047">CLEAN: DROP_NULL</text>
+    <text x="-31" y="-17" class="brain t3-e" fill="#34D399">PUSH: FEATURE_DB</text>
+    <text x="-31" y="-17" class="brain t4-e" fill="#C4B5FD">PASS: BI_DASH</text>
+    <use href="#pixel-etl-bot" x="-8" y="-9" />
+  </g>
+
+  <!-- =========================================================================
+       TRUE MULTI-DIRECTIONAL BOT 3: DEBUG BOT (Green Bug Sweeper Rover)
+       ========================================================================= -->
+  <g class="bot-debug">
+    <rect x="-36" y="-26" width="72" height="13" rx="4" fill="#064E3B" stroke="#10B981" stroke-width="1" />
+    <text x="-31" y="-17" class="brain t1-d" fill="#6EE7B7">SCAN: DESK_CLUSTER</text>
+    <text x="-31" y="-17" class="brain t2-d" fill="#FCA5A5">ALERT: DRIFT_DET</text>
+    <text x="-31" y="-17" class="brain t3-d" fill="#FDE047">FIX: RETRAIN_ML</text>
+    <text x="-31" y="-17" class="brain t4-d" fill="#67E8F9">STATE: OPTIMAL</text>
+    <use href="#pixel-debug-bot" x="-8" y="-9" />
+  </g>
+</svg>
